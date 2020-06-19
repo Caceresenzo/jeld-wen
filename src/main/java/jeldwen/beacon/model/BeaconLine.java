@@ -1,5 +1,6 @@
-package jeldwen.gather.model;
+package jeldwen.beacon.model;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,39 +25,52 @@ public class BeaconLine {
 	@Id()
 	@GeneratedValue()
 	@JsonIgnore()
+	@Column()
 	private int id;
 	
 	@Convert(converter = CustomDateAttributeConverter.class)
+	@Column()
 	private CustomDate date;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration endHour;
-	
+
+	@Column()
 	private String machine;
-	
+
+	@Column()
 	private long production;
-	
+
+	@Column()
 	private long objective;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration yellowStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration orangeStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration pinkStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration greenStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration blueStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration otherStop;
 	
 	@Convert(converter = SimpleDurationAttributeConverter.class)
+	@Column()
 	private SimpleDuration totalStop;
 	
 	/* Constructor */

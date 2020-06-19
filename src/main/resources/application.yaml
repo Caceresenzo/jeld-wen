@@ -11,6 +11,8 @@ logging:
 #    org.springframework.boot.autoconfigure: DEBUG
 
 spring:
+  resources:
+    static-locations: file:src/main/resources/static
   thymeleaf:
     cache: false
   datasource:
@@ -28,4 +30,8 @@ spring:
            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 app:
-  hello: "world"
+  config:
+    beacon:
+      report:
+        storage: ./storage/beacon/
+        extensions: csv
