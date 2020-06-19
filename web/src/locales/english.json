@@ -6,6 +6,8 @@
   "home.overview.stats.beacon-data.more": "SHOW MORE",
   "beacon-data.drawer": "Beacon Data",
   "beacon-data.report": "REPORTS",
+  "beacon-data.report.file.at-midnight": "Generated at midnight",
+  "beacon-data.report.file.not-at-midnight": "Forced generation",
   "beacon-data.report.empty": "There is no report available.",
   "beacon-data.report.tooltip.refresh": "Refresh",
   "beacon-data.report.tooltip.force-report": "Force Report Generation",

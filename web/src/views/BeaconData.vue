@@ -106,11 +106,24 @@
 						<v-list-item-avatar>
 							<v-icon>mdi-file</v-icon>
 						</v-list-item-avatar>
-
 						<v-list-item-content>
 							<v-list-item-title v-text="report.displayName || report.filename"></v-list-item-title>
 							<v-list-item-subtitle v-text="report.filename"></v-list-item-subtitle>
 						</v-list-item-content>
+						<v-list-item-action>
+							<v-tooltip bottom v-if="report.atMidnight">
+								<template v-slot:activator="{ on, attrs }">
+									<v-icon v-bind="attrs" v-on="on">mdi-clock-check</v-icon>
+								</template>
+								<span>{{ $t("beacon-data.report.file.at-midnight") }}</span>
+							</v-tooltip>
+							<v-tooltip bottom v-else>
+								<template v-slot:activator="{ on, attrs }">
+									<v-icon v-bind="attrs" v-on="on">mdi-clock-alert</v-icon>
+								</template>
+								<span>{{ $t("beacon-data.report.file.not-at-midnight") }}</span>
+							</v-tooltip>
+						</v-list-item-action>
 					</v-list-item>
 				</v-list>
 			</v-card>
@@ -158,7 +171,7 @@
 				<v-card-actions v-else>
 					<v-spacer></v-spacer>
 					<v-btn :disabled="forceReportModal.loading" @click.stop="resetForceReportDialog()">
-						{{ $t("beacon-data.report.force.cancel") }}
+						{{ $t("beacon-data.report.force.close") }}
 					</v-btn>
 				</v-card-actions>
 			</v-card>
