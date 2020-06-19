@@ -45,6 +45,10 @@ public class SimpleDuration implements Serializable {
 		return seconds % 60;
 	}
 	
+	public long getTotalSeconds() {
+		return seconds;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("%02d:%02d:%02d", getHour(), getMinutes(), getSeconds());

@@ -38,6 +38,37 @@ public class BeaconLineRestController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@GetMapping("total")
+	public ResponseEntity<Map<?, ?>> total() {
+		Map<Object, Object> response = new LinkedHashMap<>();
+		
+		Map<Object, Object> stopMap = new LinkedHashMap<>();
+		response.put("stops", stopMap);
+		
+		long yellowStop = 0, orangeStop = 0, pinkStop = 0, greenStop = 0, blueStop = 0, otherStop = 0, totalStop = 0;
+		
+		for (BeaconLine line : repository.findAll()) {
+			yellowStop += line.getYellowStop().getTotalSeconds();
+			orangeStop += line.getOrangeStop().getTotalSeconds();
+			pinkStop += line.getPinkStop().getTotalSeconds();
+			greenStop += line.getGreenStop().getTotalSeconds();
+			blueStop += line.getBlueStop().getTotalSeconds();
+			otherStop += line.getOtherStop().getTotalSeconds();
+			totalStop += line.getTotalStop().getTotalSeconds();
+		}
+		
+		stopMap.put("yellow", yellowStop);
+		stopMap.put("orange", orangeStop);
+		stopMap.put("pink", pinkStop);
+		stopMap.put("green", greenStop);
+		stopMap.put("blue", blueStop);
+		stopMap.put("other", otherStop);
+		stopMap.put("total", totalStop);
+		stopMap.put("unqualified", totalStop - (yellowStop + orangeStop + pinkStop + greenStop + blueStop + otherStop));
+		
+		return ResponseEntity.ok(response);
+	}
+	
 	@GetMapping(value = "current", produces = "text/text")
 	public String current() {
 		return repository

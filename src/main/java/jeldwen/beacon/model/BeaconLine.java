@@ -1,5 +1,8 @@
 package jeldwen.beacon.model;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -19,7 +22,7 @@ import jeldwen.common.type.SimpleDuration;
 public class BeaconLine {
 	
 	/* Constants */
-	public static final String CSV_HEAD = "Date;Heure fin;Machine;Poduction;Objectif;Arret jaune;Arret orange;Arret rose;Arret vert;Arret bleu;Arret autre;Total arret";
+	public static final String CSV_HEAD = "Date;Heure fin;Machine;Poduction;Objectif;Arret jaune;Arret orange;Arret rose;Arret vert;Arret bleu;Arret autre;Total arret;;Ajout";
 	
 	/* Variables */
 	@Id()
@@ -35,13 +38,13 @@ public class BeaconLine {
 	@Convert(converter = SimpleDurationAttributeConverter.class)
 	@Column()
 	private SimpleDuration endHour;
-
+	
 	@Column()
 	private String machine;
-
+	
 	@Column()
 	private long production;
-
+	
 	@Column()
 	private long objective;
 	
@@ -73,11 +76,14 @@ public class BeaconLine {
 	@Column()
 	private SimpleDuration totalStop;
 	
+	@Column()
+	private Date insertedAt;
+	
 	/* Constructor */
 	public BeaconLine() {
 		this(0, CustomDate.ZERO, SimpleDuration.ZERO, "", 0, 0, SimpleDuration.ZERO, SimpleDuration.ZERO, SimpleDuration.ZERO, SimpleDuration.ZERO, SimpleDuration.ZERO, SimpleDuration.ZERO, SimpleDuration.ZERO);
 	}
-
+	
 	/* Constructor */
 	public BeaconLine(int id, CustomDate date, SimpleDuration endHour, String machine, long production, long objective, SimpleDuration yellowStop, SimpleDuration orangeStop, SimpleDuration pinkStop, SimpleDuration greenStop, SimpleDuration blueStop, SimpleDuration otherStop, SimpleDuration totalStop) {
 		super();
@@ -95,6 +101,8 @@ public class BeaconLine {
 		this.blueStop = blueStop;
 		this.otherStop = otherStop;
 		this.totalStop = totalStop;
+		
+		this.insertedAt = new Date();
 	}
 	
 	public int getId() {
@@ -201,9 +209,17 @@ public class BeaconLine {
 		this.totalStop = totalStop;
 	}
 	
+	public Date getInsertedAt() {
+		return insertedAt;
+	}
+	
+	public void setInsertedAt(Date insertedAt) {
+		this.insertedAt = insertedAt;
+	}
+	
 	@Override
 	public String toString() {
-		return date + ";" + endHour + ";" + machine + ";" + production + ";" + objective + ";" + yellowStop + ";" + orangeStop + ";" + pinkStop + ";" + greenStop + ";" + blueStop + ";" + otherStop + ";" + totalStop;
+		return date + ";" + endHour + ";" + machine + ";" + production + ";" + objective + ";" + yellowStop + ";" + orangeStop + ";" + pinkStop + ";" + greenStop + ";" + blueStop + ";" + otherStop + ";" + totalStop + ";;" + insertedAt;
 	}
 	
 }
